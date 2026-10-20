@@ -8,12 +8,12 @@ const eq = (actual, expected, msg) => {
 };
 
 // ---------- detectEditTarget ----------
-eq(detectEditTarget('SELECT * FROM agent_messages'), { table: 'agent_messages', quoted: '`agent_messages`' }, '简单查询');
+eq(detectEditTarget('SELECT * FROM orders'), { table: 'orders', quoted: '`orders`' }, '简单查询');
 eq(detectEditTarget('select id, name from t where id = 1'), { table: 't', quoted: '`t`' }, '小写+where');
 eq(detectEditTarget('SELECT * FROM t x WHERE x.id = 1'), { table: 't', quoted: '`t`' }, '表别名');
 eq(detectEditTarget('SELECT * FROM t AS a ORDER BY id DESC LIMIT 10'), { table: 't', quoted: '`t`' }, 'AS+ORDER+LIMIT');
-eq(detectEditTarget('SELECT * FROM yxkj.agent_messages WHERE id > 100'), { table: 'agent_messages', quoted: '`yxkj`.`agent_messages`' }, '库名.表名');
-eq(detectEditTarget('SELECT * FROM `yxkj`.`agent messages`'), { table: 'agent messages', quoted: '`yxkj`.`agent messages`' }, '反引号表名');
+eq(detectEditTarget('SELECT * FROM shop.orders WHERE id > 100'), { table: 'orders', quoted: '`shop`.`orders`' }, '库名.表名');
+eq(detectEditTarget('SELECT * FROM `shop`.`order items`'), { table: 'order items', quoted: '`shop`.`order items`' }, '反引号表名');
 eq(detectEditTarget("SELECT * FROM t WHERE name = 'join db'"), { table: 't', quoted: '`t`' }, '字符串里的关键词不误判');
 eq(detectEditTarget('SELECT * FROM t -- group by 什么\n WHERE id=1'), { table: 't', quoted: '`t`' }, '注释里的关键词不误判');
 
@@ -51,8 +51,8 @@ eq(
   '基本 UPDATE'
 );
 eq(
-  buildUpdateSql({ quoted: '`yxkj`.`t`', sets: [{ col: 'a', value: 'x' }, { col: 'b', value: null }], where: [{ col: 'id', value: 1 }, { col: 'uid', value: 'u9' }] }),
-  "UPDATE `yxkj`.`t` SET `a` = 'x', `b` = NULL WHERE `id` = 1 AND `uid` = 'u9'",
+  buildUpdateSql({ quoted: '`shop`.`t`', sets: [{ col: 'a', value: 'x' }, { col: 'b', value: null }], where: [{ col: 'id', value: 1 }, { col: 'uid', value: 'u9' }] }),
+  "UPDATE `shop`.`t` SET `a` = 'x', `b` = NULL WHERE `id` = 1 AND `uid` = 'u9'",
   '多列+复合主键+NULL'
 );
 

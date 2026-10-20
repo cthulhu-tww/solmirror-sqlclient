@@ -17,6 +17,22 @@
 
 产品设计与痛点分析见 [PRODUCT.md](./PRODUCT.md)。
 
+## 截图
+
+| 连接管理（环境标识） | 智能字段补全 | 语法高亮 + 危险词标色 |
+|:---:|:---:|:---:|
+| ![连接管理](docs/screenshots/01-connections.png) | ![智能补全](docs/screenshots/02-autocomplete.png) | ![语法高亮](docs/screenshots/03-highlight.png) |
+
+| 安全模式拦截 | 结果集单元格编辑 | 应用修改（生成 UPDATE 确认） |
+|:---:|:---:|:---:|
+| ![安全拦截](docs/screenshots/04-safeguard.png) | ![单元格编辑](docs/screenshots/05-edit-cell.png) | ![应用修改](docs/screenshots/06-apply.png) |
+
+| 库表浏览器 |
+|:---:|
+| ![库表浏览器](docs/screenshots/07-schema.png) |
+
+> 截图中的连接、库表均为演示数据。
+
 ## 功能一览
 
 | 类别 | 功能 |
