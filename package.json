@@ -1,0 +1,51 @@
+{
+  "name": "solsqlclient",
+  "version": "0.1.6",
+  "description": "SolSQL — 开源移动端 SQL Client（MySQL），为手机运维设计：危险语句防护、智能补全、结果集编辑，APK 内嵌网关直连数据库",
+  "license": "MIT",
+  "keywords": ["mysql", "sql-client", "mobile", "android", "capacitor", "codemirror", "dba", "ops"],
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "node server/index.js",
+    "dev:web": "vite",
+    "build": "vite build",
+    "build:mobile": "npm run build && node scripts/build-mobile.mjs",
+    "assets": "node scripts/gen-assets.mjs && npx capacitor-assets generate --android",
+    "android:sync": "npm run build:mobile && npx cap sync android",
+    "apk": "npm run android:sync && cd android && gradlew.bat assembleDebug",
+    "start": "node server/index.js",
+    "start:lan": "cross-env HOST=0.0.0.0 node server/index.js",
+    "test:danger": "node test/danger.test.mjs",
+    "test:edit": "node test/edit.test.mjs",
+    "test": "npm run test:danger && npm run test:edit"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@capawesome/capacitor-nodejs": "^0.2.0",
+    "express": "^4.21.2",
+    "mysql2": "^3.11.5"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@codemirror/autocomplete": "^6.18.0",
+    "@codemirror/commands": "^6.7.0",
+    "@codemirror/lang-sql": "^6.8.0",
+    "@codemirror/state": "^6.4.1",
+    "@codemirror/view": "^6.34.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.28.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "sql-formatter": "^15.4.2",
+    "typescript": "^7.0.2",
+    "vite": "^5.4.11",
+    "zustand": "^4.5.5"
+  }
+}
